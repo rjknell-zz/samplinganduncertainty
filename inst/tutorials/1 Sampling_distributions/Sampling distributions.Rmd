@@ -86,7 +86,7 @@ sample1 <- round(sample1, 1)
 mean(sample1)
 ```
 
-So we simulated sampling 30 individuals from a population with a population mean of 120, and our sample mean is 114.7. That's somewhat close to the actual population mean but purely by random chance we got more low values than high values in our sample and so our sample mean underestimates the population mean by 5.3 mmHg. If you were to do this exercise with in the real world, however, you would have no idea at all how representative your sample mean was. It could be exactly right, it could be slightly low, it could be much, much too high. What about taking a second sample? This code is very similar to the previous exercise, but there are two mistakes that mean it won't run as it is. See if you can fix them.
+So we simulated sampling 30 individuals from a population with a population mean of 120, and our sample mean is 114.7. That's somewhat close to the actual population mean but purely by random chance we got more low values than high values in our sample and so our sample mean underestimates the population mean by 5.3 mmHg. If you were to do this exercise with in the real world, however, you would have no idea at all how representative your sample mean was. It could be exactly right, it could be slightly low, it could be much, much too high. What about taking a second sample? This code is very similar to the previous exercise, but there are three mistakes that mean it won't run as it is. See if you can fix them.
 
 ```{r mean2, exercise = TRUE}
 
@@ -113,6 +113,8 @@ mean(sample2)
 # Check that all the arguments are separated by commas
 # 
 # Check that all the brackets pair up
+#
+# Check that all the object names are correct
 ```
 
 ```{r mean2-hint-3}
@@ -123,6 +125,10 @@ mean(sample2)
 # Check that all the brackets pair up
 # 
 # There's a missing bracket in the round(... function call 
+#
+# Check that all the object names are correct
+#
+# There's a mis-named object in the round(... function call 
 ```
 
 ```{r mean2-hint-4}
@@ -141,9 +147,13 @@ sample2 <- rnorm(n = 30,
 # 
 # There's a missing bracket in the round(... function call 
 # 
+# Check that all the object names are correct
+#
+# There's a mis-named object in the round(... function call 
+#
 # It should read
 
-sample2 <- round(sample1, 1)
+sample2 <- round(sample2, 1)
 ```
 
 This time our sample mean overestimates the population mean somewhat, so the random number generator, purely by chance, gave us more high values. The value we obtained from the second sample is different from the first one simply because we have sampled (or simulated sampling) a separate set of individuals and they will not all have the same blood pressures as the women in the first sample. Now we have a somewhat better idea of what the real population mean might be: we took two samples of thirty, one of which gave a mean of 114.7 and one a mean of 123.9. You might now be a bit more confident that the true value of the mean lies somewhere in the region of these two values.

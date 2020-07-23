@@ -242,7 +242,7 @@ sample1 &lt;- round(sample1, 1)</code></pre>
 
 mean(sample1)</code></pre>
 </div>
-<p>So we simulated sampling 30 individuals from a population with a population mean of 120, and our sample mean is 114.7. That’s somewhat close to the actual population mean but purely by random chance we got more low values than high values in our sample and so our sample mean underestimates the population mean by 5.3 mmHg. If you were to do this exercise with in the real world, however, you would have no idea at all how representative your sample mean was. It could be exactly right, it could be slightly low, it could be much, much too high. What about taking a second sample? This code is very similar to the previous exercise, but there are two mistakes that mean it won’t run as it is. See if you can fix them.</p>
+<p>So we simulated sampling 30 individuals from a population with a population mean of 120, and our sample mean is 114.7. That’s somewhat close to the actual population mean but purely by random chance we got more low values than high values in our sample and so our sample mean underestimates the population mean by 5.3 mmHg. If you were to do this exercise with in the real world, however, you would have no idea at all how representative your sample mean was. It could be exactly right, it could be slightly low, it could be much, much too high. What about taking a second sample? This code is very similar to the previous exercise, but there are three mistakes that mean it won’t run as it is. See if you can fix them.</p>
 <div class="tutorial-exercise" data-label="mean2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code>set.seed(2)
 
@@ -265,7 +265,9 @@ mean(sample2)</code></pre>
 <div class="tutorial-exercise-support" data-label="mean2-hint-2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Check that all the arguments are separated by commas
 # 
-# Check that all the brackets pair up</code></pre>
+# Check that all the brackets pair up
+#
+# Check that all the object names are correct</code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="mean2-hint-3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Check that all the arguments are separated by commas
@@ -274,7 +276,11 @@ mean(sample2)</code></pre>
 # 
 # Check that all the brackets pair up
 # 
-# There&#39;s a missing bracket in the round(... function call </code></pre>
+# There&#39;s a missing bracket in the round(... function call 
+#
+# Check that all the object names are correct
+#
+# There&#39;s a mis-named object in the round(... function call </code></pre>
 </div>
 <div class="tutorial-exercise-support" data-label="mean2-hint-4" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
 <pre class="text"><code># Check that all the arguments are separated by commas
@@ -292,9 +298,13 @@ sample2 &lt;- rnorm(n = 30,
 # 
 # There&#39;s a missing bracket in the round(... function call 
 # 
+# Check that all the object names are correct
+#
+# There&#39;s a mis-named object in the round(... function call 
+#
 # It should read
 
-sample2 &lt;- round(sample1, 1)</code></pre>
+sample2 &lt;- round(sample2, 1)</code></pre>
 </div>
 <p>This time our sample mean overestimates the population mean somewhat, so the random number generator, purely by chance, gave us more high values. The value we obtained from the second sample is different from the first one simply because we have sampled (or simulated sampling) a separate set of individuals and they will not all have the same blood pressures as the women in the first sample. Now we have a somewhat better idea of what the real population mean might be: we took two samples of thirty, one of which gave a mean of 114.7 and one a mean of 123.9. You might now be a bit more confident that the true value of the mean lies somewhere in the region of these two values.</p>
 <p>Now think about what would happen if you repeated this many times, maybe a hundred. You select 30 women from the population, measure their blood pressure and calculate a mean, then you do it again 99 more times. Obviously no one would actually do this, but if you did you would generate a dataset of 100 sample means. Some of these would be very close to the actual population mean, but some would not: simply by chance in one sample you might get a lot of people with rather high blood pressure, meaning that your sample mean was rather higher than the population mean, or you might get several people with very low blood pressure leading to a low estimate. If you were to plot a frequency histogram of your 100 means it might look like this:</p>
