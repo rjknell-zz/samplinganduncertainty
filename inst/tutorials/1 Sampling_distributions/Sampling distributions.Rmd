@@ -17,7 +17,9 @@ description: >
 library(learnr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Welcome
 
+Welcome to the sampling and uncertainty tutorials. These aim to teach how we quantify uncertainty in statistics via understanding sampling distributions, standard errors and confidence intervals. There are four tutorials in total and each builds on the previous one. There is some knowledge of R assumed: if you are unhapy with concepts such as arguments in functions, saving data into vectors etc. then you should probably review these before attempting these.
 
 ## Introduction
 
