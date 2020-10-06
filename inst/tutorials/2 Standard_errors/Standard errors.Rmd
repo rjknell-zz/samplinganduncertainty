@@ -2,11 +2,8 @@
 title: "Sampling and Uncertainty 2: Standard errors"
 output: 
   learnr::tutorial:
-    progressive: false
-    theme: cerulean
-    highlight: pygments
-    css: css/test.css
-    code_folding: hide
+    theme: lumen
+    css: http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/test2.css
 runtime: shiny_prerendered
 author: Rob Knell
 description: >
@@ -19,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-### Standard errors introduced
+## Standard errors introduced
 
 In the tutorial on sampling distributions we saw that if we were to sample repeatedly from any population and calculate a mean for each sample, then as our number of samples got larger the sampling distribution of means would follow a normal distribution more and more closely. The mean of the sampling distribution will tend towards the population mean and the amount of spread in the sampling distribution will be determined by the standard deviation of the population and by size of the samples that we're calculating our means from. Knowing this can give you an indication of how representative of the population mean a single sample mean is: large sample sizes and small population standard deviations will, in general, give sample means that better reflect the population mean. That's all a bit vague, and it is often important to be more precise about how much uncertainty there is around an estimate. In this tutorial we'll look at one way of doing this via a measure caled the *standard error*.
 
@@ -28,7 +25,7 @@ Since the sampling distribution is going to approximate to a normal distribution
 $$ Standard \: error  =\frac{s}{\sqrt{n}}$$
 where $n$ is the sample size and $s$ is the sample standard deviation. This is called the *standard error of the mean*, or more usually just the *standard error*, often abbreviated to SE. Just to clear up any confusion, this means that you can easily calculate an estimate of how much spread there would be in the sampling distribution of means from a single sample: take your sample, calculate the standard deviation and divide by the square root of the sample size.
 
-### Standard errors versus standard deviations
+## Standard errors versus standard deviations
 
 People often get confused between these two statistics and it's important to be clear about what they are telling you:
 

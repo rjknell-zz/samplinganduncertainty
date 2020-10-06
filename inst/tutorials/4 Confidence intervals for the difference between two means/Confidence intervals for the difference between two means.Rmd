@@ -2,11 +2,8 @@
 title: "Sampling and uncertainty 4: Confidence intervals for the difference between two means"
 output: 
   learnr::tutorial:
-    progressive: false
-    theme: cerulean
-    highlight: pygments
-    css: css/test.css
-    code_folding: hide
+    theme: lumen
+    css: http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/test2.css
 runtime: shiny_prerendered
 author: Rob Knell
 description: >
@@ -20,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 
-### Calculating the confidence interval of the difference between means
+## Calculating the confidence interval of the difference between means
 
 So far we've only looked at the confidence interval of the mean. You can calculate confidence intervals for lots of other measures as well: proportions, the slopes and intercepts of lines and so on. Here we'll look at one useful example, the confidence interval of the difference between two means. Continuing with our penguin example, we've seen that we can get a rough indication of whether the mean weights of the penguins at our two colonies are different by looking at the confidence intervals of the two means. These show us the likely locations of the population means, and we've concluded that since the CIs don't overlap we can be reasonably sure that the population means are different. Another approach to this is to think about the difference between the two means, rather than the two means themselves. Just as we can think about the sampling distribution of the mean and calculate a standard error for the mean, so too can we think about the sampling distribution of the difference between two means and calculate a standard error for that. The confidence interval of a mean is the region where the population mean $\mu$ would lie 95% of the time if you repeatedly sampled from the population: similarly, the confidence interval for the difference between two sample means, $\bar{x}_1 -\bar{x}_2$ is the region where the difference between the two population means, $\mu_1 - \mu_2$ would lie 95% of the time if you were to repeatedly sample both means and calculate their difference.
 
@@ -38,7 +35,7 @@ $$ \textrm{Upper} \: 95\% \: \textrm{CI} = \bar{x}_1 -\bar{x}_2 + t \times SE_{d
 
 
 $$ \textrm{Lower} \: 95\% \: \textrm{CI} = \bar{x}_1 -\bar{x}_2 - t \times SE_{diff}$$
-Here, $\bar{x}_1$ is the mean of sample 1 and $bar{x}_1$ is the mean for sample 2. Similarly, $s^2 _1$ is the variance of sample 1 and $s^2 _2$ is that of sample 2, and $n_1$ and $n_2$ are the sample sizes for samples 1 and 2 respectively.
+Here, $\bar{x}_1$ is the mean of sample 1 and $\bar{x}_2$ is the mean for sample 2. Similarly, $s^2 _1$ is the variance of sample 1 and $s^2 _2$ is that of sample 2, and $n_1$ and $n_2$ are the sample sizes for samples 1 and 2 respectively.
 
 The value of t is the appropriate value on $n_1 + n_2 -2$ degrees of freedom.
 
@@ -278,7 +275,7 @@ t.test(penguins1, penguins3, var.equal = TRUE)
 
 What you can see is that in this case the confidence intervals for the difference overlap zero: the lower value is negative and the upper value is positive. It's quite plausible that the actual value of the difference between the population means is zero or close to zero, so we have little confidence that the apparent difference between these two colonies isn't simply a consequence of sampling error. That's also relfected in the p-value which we obtain for the t-test and which is greater than 0.05 but that is something for another day.
 
-### Final quiz
+## Final quiz
 
 Here's a quiz which should test how well you've understood all of the subjects we've covered in this group of tutorials. All questions have a single correct answer.
 

@@ -2,11 +2,8 @@
 title: "Sampling and uncertainty 3: Confidence intervals"
 output: 
   learnr::tutorial:
-    progressive: false
-    theme: cerulean
-    highlight: pygments
-    css: css/test.css
-    code_folding: hide
+    theme: lumen
+    css: http://research.sbcs.qmul.ac.uk/r.knell/learnr_data/test2.css
 runtime: shiny_prerendered
 author: Rob Knell
 description: >
@@ -18,11 +15,11 @@ library(learnr)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 95% Confidence intervals
+## Confidence intervals
 
 Remember that the sampling distribution of means will approximate to a normal distribution, and that we can generate an estimate of what the standard deviation of this distribution of means is by calculating the standard error or SE. One thing you might recall is that if we know the standard deviation of a normal distribution that tells us things about the distribution of data wthin a normal distribution: 68% of all the data will lie within one standard deviation of the mean, 95% of all the data will lie within 1.96 standard deviations of the mean and 99% of all the data will lie within 2.58 standard deviations of the mean, as illustrated here.
 
-```{r echo=FALSE, fig.height = 5, fig.width = 6, fig.cap="**Figure 2** Probability density of a standard normal distribution with mean=0 and standard deviation=1 showing the areas defied by the mean plus or minus 1, 1.96 and 2.58 standard deviations."}
+```{r echo=FALSE, fig.height = 5, fig.width = 6, fig.cap="**Figure 1** Probability density of a standard normal distribution with mean=0 and standard deviation=1 showing the areas defied by the mean plus or minus 1, 1.96 and 2.58 standard deviations."}
 X1 <- seq(-3, 3, length = 300)
 Y1 <- dnorm(X1)
 plot(X1, Y1, type = "n", xlab = "x", ylab = "P(x)")
@@ -61,7 +58,7 @@ arrows(-0.72,0.03,-1.95,0.03,length=0.1,angle=20,col="white")
 text(2.5,0.1, "99% of values \n within 2.58 sd \n of the mean", cex = 1)
 arrows(2.58,0.06,2.58,0.015,length=0.1,angle=20)
 ```
-Let's flip that around: if we have an estimate of the mean and we know the standard error (which is the standard deviation of the sampling distribution of means), how often will the population mean lie within one standard error of our sample mean? Well, if 68% of the data lie within one standard deviations of the mean, then 68% of the time will we get a sample mean that's one standard error or less from the population mean.
+Let's flip that around: if we have an estimate of the mean and we know the standard error (which is the standard deviation of the sampling distribution of means), how often will the population mean lie within one standard error of our sample mean? Well, if 68% of the data lie within one standard deviation of the mean, then 68% of the time will we get a sample mean that's one standard error or less from the population mean.
 
 Let's get R's random number generators to test this out for us.
 
@@ -73,7 +70,7 @@ set.seed(15)
 means <- numeric(1000)
 se <- numeric(1000)
 
-# Generate 1000 means and SEs samplnng from
+# Generate 1000 means and SEs sampling from
 # the same population
 for (i in 1:1000) 
   {
@@ -95,9 +92,47 @@ table(miss)
 677 out of a 1000 times, or 67.7% of the time our random number generator produces a sample which is within one standard error of the population mean. This is very close to 68%, which is the percentage of data that should lie within one standard deviation of the mean in a normal distribution, and if we did this for, say, a million samples instead of a thousand it would be very close to 68% indeed. If we know the mean and the SE, therefore, we can quote a range of values within which we should find the population mean, the value we're really interested in, 68% of the time. We could call this the *68% confidence interval*.
 
 $$ 68\% \: CI  = \textrm{from} \:\bar{x} - SE \: \textrm{to} \: \bar{x} + SE $$
+
+## 95% Confidence intervals
+
 Now we are able to really quantify how uncertain we are about our estimate of the population mean, and we can put a figure on it. 68% confidence is a bit of a small value though, and it would be better if we could express a range which was more likely to include the true mean. Recall that 95% of the values in a normally distributed dataset should lie within 1.96 standard deviations of the mean. Is it the case that 95% of the time the population mean should lie within 1.96 standard errors of the sample mean?
 
-Sort of... if we know what the *population* standard deviation is then we know the standard error without bias and that will be true. If we don't know the population standard deviation, however, our sample standard deviation, from which we calculate our standard error, will actually be slightly biased towards lower values, especially for small samples. What we do to becase of this is to multiply the standard error by a value derived from something called the *t-distribution*, which corrects for this bias. We can find the value of *t* corresponding to that 1.96 value for a normal distribution by using R's `qt()` function which gives us the *quantiles* of the t-distribution, or in other words the value of *t* below which a given proportion of the data in a t-distribution should lie. As an example:
+Sort of... if we know what the *population* standard deviation is then we know the standard error without bias and that will be true. If we don't know the population standard deviation, however, our sample standard deviation, from which we calculate our standard error, will actually be slightly biased towards lower values, especially for small samples. What we do to becase of this is to multiply the standard error by a value derived not from a normal distribution but from something called the *t-distribution*, which corrects for this bias.
+
+```{r echo = FALSE, fig.cap="**Figure 2** Normal distribution compared to two t-distributions. Black line: probability density of a standard normal distribution with mean=0 and standard deviation=1, Blue line: probability density of a *t* distribution on 2 degrees of freedom, Red line: probability density of a *t* distribution on 5 degrees of freedom. Note that the t-distribution is lower and wider than the normal distribution. This is because it is corrected for the probability of missing extreme large or small values at small sample sizes."}
+X1 <- seq(-3, 3, length.out = 200)
+
+Y1 <- dnorm(X1)
+Y2 <- dt(X1, df = 2)
+Y3 <- dt(X1, df = 5)
+
+plot(Y1 ~ X1,
+     type = "l",
+     col = "black",
+     xlab = "",
+     ylab = "Probability density"
+)
+
+points(Y2 ~ X1,
+       type = "l",
+       col = "steelblue"
+)
+
+points(Y3 ~ X1,
+       type = "l",
+       col = "firebrick4"
+)
+
+legend("topleft",
+       legend = c("Normal", "t 5df", "t 2f"),
+       lty = 1,
+       col = c("black", "firebrick4", "steelblue")
+)
+```
+
+
+
+We can find the value of *t* corresponding to that 1.96 value for a normal distribution by using R's `qt()` function which gives us the *quantiles* of the t-distribution, or in other words the value of *t* below which a given proportion of the data in a t-distribution should lie. As an example:
 
 ```{r}
 qt(0.5, df = 100)
@@ -250,6 +285,8 @@ quiz(
 )
 ```
 
+## Comparing two penguin populations
+
 Back to the penguins which we looked at in the first tutorial! Let's say that you've managed to measure the weights of 15 chinstrap penguins in one of your study populations. The weights that you've measured are (in Kg) 
 
 6.0, 5.8, 4.5, 3.7, 6.0, 4.3, 5.0, 6.0, 5.8, 3.5, 5.5, 5.7, 6.2, 4.7, 5.7
@@ -324,7 +361,7 @@ t1 <- qt(0.95, df = 14)
 # Calculate the SE
 SE1 <- sd(sample1)/sqrt(15)
 
-# Calculute the value of t
+# Calculate the value of t
 t1 <- qt(0.975, df = 14)
 ```
 
@@ -405,6 +442,9 @@ cat("Lower CI =", lowerCI2)
 
 cat("Upper CI =", upperCI2)
 ```
+
+
+## Plotting confidence intervals
 
 The confidence intervals for our second penguin sample are distinctly lower than those for the first. Let's plot a graph with *error bars* showing the two regions. You can see that I'm using the `arrows()` function to draw in the error bars, which is the easiest way to do this in base R graphics. 
 
